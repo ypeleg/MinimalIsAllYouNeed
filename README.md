@@ -32,39 +32,42 @@ for example:
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
     model.fit(X, Y)
-
+```
 
     Train on 9414 samples, validate on 957 samples
     Epoch 1/50
     9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 
-```
+    
 
 
-
-Or:
-
+==Bert
 ```python
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
 ```
+==Universal Transformer
 ```python
     model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+==GPT
 ```python
     model = GPT()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+==GPT-2
 ```python
     model = GPT_2()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+==ELMo
 ```python
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
 ```
+==XLNet
 ```python
-    model = XlNet()
+    model = XLNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
 
