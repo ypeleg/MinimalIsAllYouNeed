@@ -7,7 +7,7 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
 ##### What if you could just use transformers in keras without clutter...
 
 ```python
-    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer
+    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer, the_loss_of_bert
 ```
 
 ##### And then simply: 
