@@ -31,12 +31,7 @@ for example:
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
     model.fit(X, Y)
-```
-
-Train on 9414 samples, validate on 957 samples
-Epoch 1/50
-9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 
-    
+```    
 
 
 ### Bert
