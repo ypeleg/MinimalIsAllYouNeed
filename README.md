@@ -18,9 +18,9 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
     model.fit(X, Y)
 ```    
 
-*No games. *
-*No tricks.*
-*No bloat.*
+#### No games. 
+#### No tricks.
+#### No bloat.
 
 -----
 
