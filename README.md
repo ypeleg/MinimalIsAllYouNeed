@@ -32,36 +32,40 @@ for example:
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
     model.fit(X, Y)
-```
+
 
     Train on 9414 samples, validate on 957 samples
     Epoch 1/50
-    9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 - perplexity: 1044.2455
-        - val_loss: 6.3167 - val_perplexity: 406.5031
-    ...
+    9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 
+```
+
+
 
 Or:
 
 ```python
-
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
-
+```
+```python
     model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
-
+```
+```python
     model = GPT()
     model.compile('adam', loss='sparse_categorical_crossentropy')
-
+```
+```python
     model = GPT_2()
     model.compile('adam', loss='sparse_categorical_crossentropy')
-
+```
+```python
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
-
+```
+```python
     model = XlNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
-
 ```
 
 It also allows you to piece together a multi-step Transformer model
