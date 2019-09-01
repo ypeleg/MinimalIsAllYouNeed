@@ -13,7 +13,7 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
 ##### And then simply: 
 
 <p align="center">
-  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/Bert.png?raw=true" width="400">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/bert.png?raw=true" width="400">
 </p>
 
 -----
