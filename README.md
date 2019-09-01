@@ -33,20 +33,16 @@ for example:
     model.fit(X, Y)
 ```    
 
+### More Examples:
 
 ### Bert
 ```python
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
 ```
-### Universal Transformer
+### XLNet
 ```python
-    model = Transformer()
-    model.compile('adam', loss='sparse_categorical_crossentropy')
-```
-### GPT
-```python
-    model = GPT()
+    model = XLNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
 ### GPT-2
@@ -59,9 +55,14 @@ for example:
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
 ```
-### XLNet
+### GPT
 ```python
-    model = XLNet()
+    model = GPT()
+    model.compile('adam', loss='sparse_categorical_crossentropy')
+```
+### Universal Transformer
+```python
+    model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
 
