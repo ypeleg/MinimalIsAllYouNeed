@@ -40,22 +40,22 @@ for example:
     
 
 
-==Bert
+== Bert
 ```python
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
 ```
-==Universal Transformer
+== Universal Transformer
 ```python
     model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
-==GPT
+== GPT
 ```python
     model = GPT()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
-==GPT-2
+== GPT-2
 ```python
     model = GPT_2()
     model.compile('adam', loss='sparse_categorical_crossentropy')
@@ -65,7 +65,7 @@ for example:
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
 ```
-==XLNet
+== XLNet
 ```python
     model = XLNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
