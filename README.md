@@ -1,6 +1,5 @@
 
-Minimal Is All You Need
-=================
+## Minimal Is All You Need
 
 Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit .predict .
 
@@ -40,32 +39,32 @@ for example:
     
 
 
-== Bert
+### Bert
 ```python
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
 ```
-== Universal Transformer
+### Universal Transformer
 ```python
     model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
-== GPT
+### GPT
 ```python
     model = GPT()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
-== GPT-2
+### GPT-2
 ```python
     model = GPT_2()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
-==ELMo
+### ELMo
 ```python
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
 ```
-== XLNet
+### XLNet
 ```python
     model = XLNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
