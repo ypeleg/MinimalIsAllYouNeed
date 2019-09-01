@@ -12,9 +12,15 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
 
 ##### And then simply: 
 
-<p align="center">
-  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/bert.png?raw=true" width="400">
-</p>
+```python
+    model = Bert()
+    model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
+    model.fit(X, Y)
+```    
+
+*No games. *
+*No tricks.*
+*No bloat.*
 
 -----
 
@@ -34,17 +40,7 @@ The library supports:
 * memory-compressed attention,
 * ACT (adaptive computation time),
 
-
-It allows you to just build them. *No games. No tricks. No bloat*.
-for example:
-
-```python
-    model = Bert()
-    model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
-    model.fit(X, Y)
-```    
-
-### More Examples:
+### Examples:
 
 ### Bert
 ```python
