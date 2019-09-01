@@ -21,10 +21,10 @@ The library supports:
 * ACT (adaptive computation time),
 
 ```python
-    from minimal_is_all_you_need import Transformer, ELMo, Bert, GPT, GPT_2, XLNet
+    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer
 ```
 
-It allows you to just build them. No games. No tricks. No bloat.
+It allows you to just build them. *No games. No tricks. No bloat*.
 for example:
 
 ```python
@@ -33,9 +33,9 @@ for example:
     model.fit(X, Y)
 ```
 
-    Train on 9414 samples, validate on 957 samples
-    Epoch 1/50
-    9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 
+Train on 9414 samples, validate on 957 samples
+Epoch 1/50
+9414/9414 [==============================] - 76s 8ms/step - loss: 7.0847 
     
 
 
