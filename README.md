@@ -18,7 +18,6 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
 
 -----
 
-
 Have you ever wanted to work with transformers but just got drowned in ocean of models where none just did what you wanted?
 Yeah.. Me Too..
 Introducing "Minimal Is All You Need": Minimal Is All You Need is a Python library implementing nuts and bolts, for building Transformers models using [Keras](http://keras.io).
@@ -108,6 +107,9 @@ Installation
 To install the library you need to clone the repository
 
     pip install minimal_is_all_you_need
+
+
+#### Note: Not anything in this repository was made by myself. some i found online and tried to give credict. This is still work in progress so if by any chance some authors didn't get their credit. PM me! 
 
 
 [1]: https://arxiv.org/abs/1706.03762 "Attention Is All You Need"
