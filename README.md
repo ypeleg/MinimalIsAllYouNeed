@@ -3,6 +3,21 @@
 
 Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit .predict .
 
+-----
+##### What if you could just use transformers in keras without clutter...
+
+```python
+    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer
+```
+
+##### And then simply: 
+
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/Bert.png?raw=true" width="400">
+</p>
+
+-----
+
 
 Have you ever wanted to work with transformers but just got drowned in ocean of models where none just did what you wanted?
 Yeah.. Me Too..
@@ -20,9 +35,6 @@ The library supports:
 * memory-compressed attention,
 * ACT (adaptive computation time),
 
-```python
-    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer
-```
 
 It allows you to just build them. *No games. No tricks. No bloat*.
 for example:
