@@ -132,8 +132,11 @@ To install the library you need to clone the repository
 
     pip install minimal_is_all_you_need
 
-
-#### Note: Not everything in this repository was made by myself. Parts of the code here and there were found online. I tried to give credict whenever this happened but mistakes might still happen!. If by any chance some authors didn't get their credit and you know it: PM ME! I will solve it ASAP! Cheers ^^ 
+### Important Note: 
+#### Note: Not everything in this repository was made by myself. Parts of the code here and there were found online. 
+#### I tried to give credict whenever this happened but mistakes might still happen!. 
+#### If by any chance some authors didn't get their credit and you know it: PM ME! I will fix it ASAP!
+#### Cheers ^^ 
 
 
 [1]: https://arxiv.org/abs/1706.03762 "Attention Is All You Need"
