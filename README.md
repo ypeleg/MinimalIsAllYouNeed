@@ -1,5 +1,5 @@
 <p align="center">
-Still in development. Highly experimental and unstable yet. 
+Edit: Highly experimental and unstable yet, This is still in development. 
 </p>
 
 ## Minimal Is All You Need
