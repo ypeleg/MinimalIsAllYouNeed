@@ -1,7 +1,9 @@
+
 import os
 import time
 
 import numpy as np
+
 from keras import backend as K
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.layers import Dense, Input, SpatialDropout1D
@@ -115,8 +117,8 @@ class ELMo_obj(object):
             lstm_inputs = TimestepDropout(self.parameters['word_dropout_rate'])(drop_inputs)
             next_ids = Input(shape=(None, 1), name='next_ids', dtype='float32')
             previous_ids = Input(shape=(None, 1), name='previous_ids', dtype='float32')
-        re_lstm_inputs = Lambda(function=ELMo.reverse)(lstm_inputs)
-        mask = Lambda(function=ELMo.reverse)(drop_inputs)
+        re_lstm_inputs = Lambda(function=ELMo_obj.reverse)(lstm_inputs)
+        mask = Lambda(function=ELMo_obj.reverse)(drop_inputs)
 
         for i in range(self.parameters['n_lstm_layers']):
             if self.parameters['cuDNN']: lstm = CuDNNLSTM(units=self.parameters['lstm_units_size'], return_sequences=True, kernel_constraint=MinMaxNorm(-1*self.parameters['cell_clip'], self.parameters['cell_clip']), recurrent_constraint=MinMaxNorm(-1*self.parameters['cell_clip'], self.parameters['cell_clip']))(lstm_inputs)
@@ -133,23 +135,24 @@ class ELMo_obj(object):
             re_proj = TimeDistributed(Dense(self.parameters['hidden_units_size'], activation='linear', kernel_constraint=MinMaxNorm(-1 * self.parameters['proj_clip'], self.parameters['proj_clip']) ))(re_lstm)
             re_lstm_inputs = add([re_proj, re_lstm_inputs], name='b_block_{}'.format(i + 1))
             re_lstm_inputs = SpatialDropout1D(self.parameters['dropout_rate'])(re_lstm_inputs)
-        re_lstm_inputs = Lambda(function=ELMo.reverse, name="reverse")(re_lstm_inputs)
+        re_lstm_inputs = Lambda(function=ELMo_obj.reverse, name="reverse")(re_lstm_inputs)
         sampled_softmax = SampledSoftmax(num_classes=self.parameters['vocab_size'], num_sampled=int(self.parameters['num_sampled']), tied_to=embeddings if self.parameters['weight_tying'] and self.parameters['token_encoding'] == 'word' else None)
         outputs = sampled_softmax([lstm_inputs, next_ids])
         re_outputs = sampled_softmax([re_lstm_inputs, previous_ids])
         self._model = Model(inputs=[word_inputs, next_ids, previous_ids], outputs=[outputs, re_outputs])
         # self._model.compile(optimizer=Adagrad(lr=self.parameters['lr'], clipvalue=self.parameters['clip_value']), loss=None)
         # if print_summary: self._model.summary()
+        self.wrap_multi_elmo_encoder()
 
     def train(self, train_data, valid_data):
-        weights_file = os.path.join(MODELS_DIR, "elmo_best_weights.hdf5")
+        weights_file = os.path.join('.', "elmo_best_weights.hdf5")
         save_best_model = ModelCheckpoint(filepath=weights_file, monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
         early_stopping = EarlyStopping(patience=self.parameters['patience'], restore_best_weights=True)
         t_start = time.time()
         self._model.fit_generator(train_data, validation_data=valid_data, epochs=self.parameters['epochs'], workers=self.parameters['n_threads'] if self.parameters['n_threads'] else os.cpu_count(), use_multiprocessing=True if self.parameters['multi_processing'] else False, callbacks=[save_best_model])
 
     def fit(self, train_data, valid_data):
-        weights_file = os.path.join(MODELS_DIR, "elmo_best_weights.hdf5")
+        weights_file = os.path.join('.', "elmo_best_weights.hdf5")
         save_best_model = ModelCheckpoint(filepath=weights_file, monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
         early_stopping = EarlyStopping(patience=self.parameters['patience'], restore_best_weights=True)
         t_start = time.time()
@@ -179,28 +182,28 @@ class ELMo_obj(object):
         y_pred_forward, y_pred_backward = self._model.predict([x, y_true_forward, y_true_backward])
         y_true_forward, y_pred_forward = unpad(x, y_true_forward, y_pred_forward)
         y_true_backward, y_pred_backward = unpad(x, y_true_backward, y_pred_backward)
-        print('Forward Langauge Model Perplexity: {}'.format(ELMo.perplexity(y_pred_forward, y_true_forward)))
-        print('Backward Langauge Model Perplexity: {}'.format(ELMo.perplexity(y_pred_backward, y_true_backward)))
+        print('Forward Langauge Model Perplexity: {}'.format(ELMo_obj.perplexity(y_pred_forward, y_true_forward)))
+        print('Backward Langauge Model Perplexity: {}'.format(ELMo_obj.perplexity(y_pred_backward, y_true_backward)))
 
     def wrap_multi_elmo_encoder(self, print_summary=False, save=False):
         elmo_embeddings = list()
         elmo_embeddings.append(concatenate([self._model.get_layer('token_encoding').output, self._model.get_layer('token_encoding').output], name='elmo_embeddings_level_0'))
-        for i in range(self.parameters['n_lstm_layers']): elmo_embeddings.append(concatenate([self._model.get_layer('f_block_{}'.format(i + 1)).output, Lambda(function=ELMo.reverse) (self._model.get_layer('b_block_{}'.format(i + 1)).output)], name='elmo_embeddings_level_{}'.format(i + 1)))
+        for i in range(self.parameters['n_lstm_layers']): elmo_embeddings.append(concatenate([self._model.get_layer('f_block_{}'.format(i + 1)).output, Lambda(function=ELMo_obj.reverse) (self._model.get_layer('b_block_{}'.format(i + 1)).output)], name='elmo_embeddings_level_{}'.format(i + 1)))
         camos = list()
         for i, elmo_embedding in enumerate(elmo_embeddings): camos.append(Camouflage(mask_value=0.0, name='camo_elmo_embeddings_level_{}'.format(i + 1))([elmo_embedding, self._model.get_layer( 'token_encoding').output]))
         self._elmo_model = Model(inputs=[self._model.get_layer('word_indices').input], outputs=camos)
         if print_summary: self._elmo_model.summary()
-        if save: self._elmo_model.save(os.path.join(MODELS_DIR, 'ELMo_Encoder.hd5'))
+        if save: self._elmo_model.save(os.path.join('.', 'ELMo_Encoder.hd5'))
 
     def save(self, sampled_softmax=True):
         if not sampled_softmax: self.parameters['num_sampled'] = self.parameters['vocab_size']
         self.compile_elmo()
-        self._model.load_weights(os.path.join(MODELS_DIR, 'elmo_best_weights.hdf5'))
-        self._model.save(os.path.join(MODELS_DIR, 'ELMo_LM_EVAL.hd5'))
+        self._model.load_weights(os.path.join('.', 'elmo_best_weights.hdf5'))
+        self._model.save(os.path.join('.', 'ELMo_LM_EVAL.hd5'))
         print('ELMo Language Model saved successfully')
 
-    def load(self): self._model = load_model(os.path.join(MODELS_DIR, 'ELMo_LM.h5'), custom_objects={'TimestepDropout': TimestepDropout, 'Camouflage': Camouflage})
-    def load_elmo_encoder(self): self._elmo_model = load_model(os.path.join(MODELS_DIR, 'ELMo_Encoder.hd5'), custom_objects={'TimestepDropout': TimestepDropout, 'Camouflage': Camouflage})
+    def load(self): self._model = load_model(os.path.join('.', 'ELMo_LM.h5'), custom_objects={'TimestepDropout': TimestepDropout, 'Camouflage': Camouflage})
+    def load_elmo_encoder(self): self._elmo_model = load_model(os.path.join('.', 'ELMo_Encoder.hd5'), custom_objects={'TimestepDropout': TimestepDropout, 'Camouflage': Camouflage})
     def get_outputs(self, test_data, output_type='word', state='last'):
         x = []
         for i in range(len(test_data)):
