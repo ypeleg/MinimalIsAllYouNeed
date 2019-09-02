@@ -1,6 +1,6 @@
-
-##### Warning: Still in development. Highly experimental and unstable yet. 
-
+<p align="center">
+Still in development. Highly experimental and unstable yet. 
+</p>
 
 ## Minimal Is All You Need
 
