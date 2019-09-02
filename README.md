@@ -1,4 +1,7 @@
 
+##### Warning: Still in development. Highly experimental and unstable yet. 
+
+
 ## Minimal Is All You Need
 
 Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit .predict .
