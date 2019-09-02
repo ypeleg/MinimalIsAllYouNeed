@@ -1,6 +1,6 @@
 
 <p align="center">
-⚠️ Edit: Experimental and unstable yet. Still in development. ⚠️ 
+⚠️ Experimental and unstable yet. Still in development. ⚠️ 
 </p>
 
 
@@ -53,34 +53,56 @@ The library supports:
     model = Bert()
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/Bert.png?raw=true" width="300">
+</p>
+
 ### XLNet
 ```python
     model = XLNet()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/XLNet.png?raw=true" width="300">
+</p>
+
 ### GPT-2
 ```python
     model = GPT_2()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/GPT_2.png?raw=true" width="300">
+</p>
+
 ### ELMo
 ```python
     model = ELMo()
     model.compile('adagrad', loss='sparse_categorical_crossentropy')
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/ELMo.png?raw=true" width="300">
+</p>
+
 ### GPT
 ```python
     model = GPT()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/GPT.png?raw=true" width="300">
+</p>
+
 ### Universal Transformer
 ```python
     model = Transformer()
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/Transformer.png?raw=true" width="300">
+</p>
 
-It also allows you to piece together a multi-step Transformer model
-in a flexible way, for example:
+It also allows you to piece together a multi-step Transformer model in a flexible way, for example: (Credit: Zhao HG)
 
 ```python
 transformer_block = TransformerBlock( name='transformer', num_heads=8, residual_dropout=0.1, attention_dropout=0.1, use_masking=True)
