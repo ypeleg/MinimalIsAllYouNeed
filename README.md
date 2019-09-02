@@ -72,7 +72,7 @@ The library supports:
     model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
 <p align="center">
-  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/GPT_2.png?raw=true" width="300">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/GPT_2.png?raw=true" width="300" height="1000">
 </p>
 
 ### ELMo
