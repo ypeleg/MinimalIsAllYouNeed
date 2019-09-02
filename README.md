@@ -1,6 +1,8 @@
+-----
 <p align="center">
 Edit: Highly experimental and unstable yet, This is still in development. 
 </p>
+-----
 
 ## Minimal Is All You Need
 
