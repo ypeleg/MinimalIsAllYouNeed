@@ -136,7 +136,9 @@ To install the library you need to clone the repository
 ### References 
 
 [1]: https://arxiv.org/abs/1706.03762 Attention Is All You Need
+
 [2]: https://arxiv.org/abs/1807.03819 Universal Transformers
+
 [3]: https://arxiv.org/abs/1810.04805 BERT: Pre-training of Deep Bidirectional Transformers for
 
 
