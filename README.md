@@ -133,15 +133,14 @@ To install the library you need to clone the repository
     pip install minimal_is_all_you_need
 
 
-References
-------------
+### References 
 
-[1]: https://arxiv.org/abs/1706.03762 "Attention Is All You Need"
-[2]: https://arxiv.org/abs/1807.03819 "Universal Transformers"
-[3]: https://arxiv.org/abs/1810.04805 "BERT: Pre-training of Deep Bidirectional Transformers for
-
+[1]: https://arxiv.org/abs/1706.03762 Attention Is All You Need
+[2]: https://arxiv.org/abs/1807.03819 Universal Transformers
+[3]: https://arxiv.org/abs/1810.04805 BERT: Pre-training of Deep Bidirectional Transformers for
 
 
+###  
 ### Important Note: 
 #### Note: Not everything in this repository was made by myself. Parts of the code here and there were found online. 
 #### I tried to give credict whenever this happened but mistakes might still happen!. 
