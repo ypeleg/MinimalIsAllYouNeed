@@ -1,8 +1,6 @@
 
 <p align="center">
-Edit: Highly experimental and unstable yet, This is still in development. 
-
-
+⚠️ Edit: Experimental and unstable yet. Still in development. ⚠️ 
 </p>
 
 
