@@ -13,7 +13,7 @@ Minimalist Transformers In [Keras](http://keras.io) that support sklearn's .fit 
 ##### What if you could just use transformers in keras without clutter...
 
 ```python
-    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer, the_loss_of_bert
+    from minimal_is_all_you_need import Bert, GPT_2, XLNet, ELMo, GPT,  Transformer, TransformerXL, the_loss_of_bert
 ```
 
 ##### And then simply: 
@@ -82,6 +82,15 @@ The library supports:
 ```
 <p align="center">
   <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/ELMo.png?raw=true" width="300">
+</p>
+
+### TransformerXL
+```python
+    model = TransformerXL()
+    model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
+```
+<p align="center">
+  <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/TransformerXL.png?raw=true" width="300">
 </p>
 
 ### GPT
