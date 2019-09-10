@@ -87,7 +87,7 @@ The library supports:
 ### TransformerXL
 ```python
     model = TransformerXL()
-    model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
+    model.compile('adam', loss='sparse_categorical_crossentropy')
 ```
 <p align="center">
   <img src="https://github.com/ypeleg/MinimalIsAllYouNeed/blob/master/resources/TransformerXL.png?raw=true" width="300">
