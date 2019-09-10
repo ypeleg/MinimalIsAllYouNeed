@@ -606,9 +606,10 @@ def gelu(x):
     return 0.5 * x * (1 + K.tanh(c * (x + 0.044715 * K.pow(x, 3))))
 
 
-class LayerNormalization(Layer):
+class LayerNormalization(keras.layers.Layer):
 
     def __init__(self, axis=-1, **kwargs):
+        self.supports_masking = True
         self.axis = axis
         super(LayerNormalization, self).__init__(**kwargs)
 
@@ -616,6 +617,9 @@ class LayerNormalization(Layer):
         config = super().get_config()
         config['axis'] = self.axis
         return config
+
+    def compute_mask(self, inputs, mask=None):
+        return [None, None]
 
     def build(self, input_shape):
         dim = input_shape[-1]
