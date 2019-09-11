@@ -141,8 +141,9 @@ class ELMo_obj(object):
         re_outputs = sampled_softmax([re_lstm_inputs, previous_ids])
         self._model = Model(inputs=[word_inputs, next_ids, previous_ids], outputs=[outputs, re_outputs])
         # self._model.compile(optimizer=Adagrad(lr=self.parameters['lr'], clipvalue=self.parameters['clip_value']), loss=None)
-        # if print_summary: self._model.summary()
-        self.wrap_multi_elmo_encoder()
+        if print_summary: self._model.summary()
+        # self.wrap_multi_elmo_encoder()
+        self._elmo_model = self._model
 
     def train(self, train_data, valid_data):
         weights_file = os.path.join('.', "elmo_best_weights.hdf5")

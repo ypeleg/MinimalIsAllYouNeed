@@ -711,7 +711,7 @@ class Memory(keras.layers.Layer):
         self.memory = None
 
     def build(self, input_shape):
-        self.memory = self.add_weight( shape=(self.batch_size, self.memory_len + self.target_len, self.output_dim), initializer='zeros', trainable=False, name='memory', )
+        self.memory = self.add_weight(shape=(self.batch_size, self.memory_len + self.target_len, self.output_dim), initializer='zeros', trainable=False, name='memory', )
         super(Memory, self).build(input_shape)
 
     def compute_output_shape(self, input_shape):
@@ -728,12 +728,15 @@ class Memory(keras.layers.Layer):
         seq_len = K.cast(K.shape(inputs)[1], 'int32')
 
         # Build new memory
-        pad = K.tile(inputs[0:1, ...], (self.batch_size - batch_size, 1, 1))
+        print self.batch_size
+        print batch_size
+        print self.batch_size - batch_size
+        pad = K.tile(inputs[0:1, :], (self.batch_size - batch_size, 1, 1))
         padded = K.concatenate([inputs, pad], axis=0)
         new_memory = K.concatenate([self.memory, padded], axis=1)
         new_memory = tf.slice( new_memory, (0, seq_len, 0), (self.batch_size, self.memory_len + self.target_len, self.output_dim), )
         self.add_update(K.update(self.memory, new_memory), inputs)
-        old_memory = tf.slice( new_memory, (0, K.maximum(0, self.memory_len + self.target_len - seq_len - memory_length), 0), (batch_size, K.minimum(self.memory_len, memory_length), self.output_dim), )
+        old_memory = tf.slice(new_memory, (0, K.maximum(0, self.memory_len + self.target_len - seq_len - memory_length), 0), (batch_size, K.minimum(self.memory_len, memory_length), self.output_dim), )
         return old_memory
 
     def get_config(self):
@@ -885,8 +888,8 @@ def set_custom_objects():
         keras.utils.get_custom_objects()[key] = val
 
 
-def XLNet(units=6, training=True, num_token=31, num_block=2, num_head=2, hidden_dim=12, batch_size=2, memory_len=5, target_len=5, dropout=0.1, attention_dropout=0.1, permute=None, mask_index=5, attention_type='uni', clamp_len=None, shared_biases=True):
-
+def XLNet(units=6, training=True, num_token=31, num_block=2, num_head=2, hidden_dim=12, batch_size=32, memory_len=5,
+          target_len=5, dropout=0.1, attention_dropout=0.1, permute=None, mask_index=5, attention_type='uni', clamp_len=None, shared_biases=True):
     if permute is None:
         permute = training
 
@@ -940,7 +943,6 @@ def XLNet(units=6, training=True, num_token=31, num_block=2, num_head=2, hidden_
                 rate=dropout,
                 name='Embed-Mask-Dropout'
             )(mask_embed)
-
     memories = [Memory(
         batch_size=batch_size,
         memory_len=memory_len,
@@ -948,20 +950,17 @@ def XLNet(units=6, training=True, num_token=31, num_block=2, num_head=2, hidden_
         output_dim=units,
         name='Memory-0',
     )([token_embed, memory_length_input])]
-
     pos_embed = PositionalEmbedding(
         output_dim=units,
         clamp_len=clamp_len,
         directional=attention_type == 'uni',
         name='Embed-Pos',
     )([token_embed, memories[0]])
-
     content_mask, query_mask = PermutationMask(
         enabled=permute,
         directional=attention_type == 'uni',
         name='Permutation',
     )([token_embed, memories[0]])
-
     context_bias, relative_bias, segment_bias = None, None, None
     if shared_biases:
         context_bias, relative_bias = RelativeBias(
@@ -972,11 +971,9 @@ def XLNet(units=6, training=True, num_token=31, num_block=2, num_head=2, hidden_
             units,
             name='Segment-Bias',
         )(memories[0])
-
     content_output, query_output = token_embed, None
     if training:
         query_output = mask_embed
-
     for i in range(num_block):
         if not shared_biases:
             context_bias, relative_bias = RelativeBias(
