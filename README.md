@@ -40,6 +40,7 @@ The library supports:
 * ELMo
 * GPT
 * GPT-2
+* TransformerXL
 * XLNet
 * positional encoding and embeddings,
 * attention masking,
