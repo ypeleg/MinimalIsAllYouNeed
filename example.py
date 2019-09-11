@@ -8,7 +8,9 @@ X, Y = get_example_data()
 
 def main():
 
+
     model = Bert()
+
     model.compile('adam', loss=[the_loss_of_bert(0.1), 'binary_crossentropy'])
     model.fit(X, Y)
     model.predict(X)
