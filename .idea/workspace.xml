@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d04e650a-8910-4e79-8ab4-d35b4337a757" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/example.py.orig" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example.py" afterPath="$PROJECT_DIR$/example.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minimal_is_all_you_need/custom_layers/sampled_softmax.py" afterPath="$PROJECT_DIR$/minimal_is_all_you_need/custom_layers/sampled_softmax.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minimal_is_all_you_need/elmo.py" afterPath="$PROJECT_DIR$/minimal_is_all_you_need/elmo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minimal_is_all_you_need/transformer_xl.py" afterPath="$PROJECT_DIR$/minimal_is_all_you_need/transformer_xl.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +17,8 @@
       <file leaf-file-name="example.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="925">
+              <caret line="77" column="1" lean-forward="false" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -374,8 +370,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="925">
+          <caret line="77" column="1" lean-forward="false" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
