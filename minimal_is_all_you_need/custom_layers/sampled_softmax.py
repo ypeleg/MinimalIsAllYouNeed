@@ -4,12 +4,12 @@ from keras.layers import Layer
 
 class SampledSoftmax(Layer):
 
-    def __init__(self, num_classes=50000, num_sampled=1000, tied_to=None, **kwargs):
+    def __init__(self, num_classes=50000, num_sampled=1, tied_to=None, **kwargs):
         super(SampledSoftmax, self).__init__(**kwargs)
         self.num_sampled = num_sampled
         self.num_classes = num_classes
         self.tied_to = tied_to
-        self.sampled = (self.num_classes != self.num_sampled)
+        self.sampled = False # (self.num_classes != self.num_sampled)
 
     def build(self, input_shape):
         if self.tied_to is None:
@@ -18,6 +18,7 @@ class SampledSoftmax(Layer):
         self.built = True
 
     def call(self, x, mask=None):
+
         lstm_outputs, next_token_ids = x
 
         def sampled_softmax(x):
@@ -42,7 +43,7 @@ class SampledSoftmax(Layer):
             return [batch_losses, batch_predictions]
 
         losses, predictions = K.tf.map_fn(sampled_softmax if self.sampled else softmax, [lstm_outputs, next_token_ids])
-        self.add_loss(0.5 * K.tf.reduce_mean(losses[0]))
+        # self.add_loss(0.5 * K.tf.reduce_mean(losses[0]))
         return lstm_outputs if self.sampled else predictions
 
     def compute_output_shape(self, input_shape):

@@ -21,14 +21,14 @@ from .custom_layers import TimestepDropout, Camouflage, Highway, SampledSoftmax
 
 parameters_default = {
     'multi_processing': False,
-    'n_threads': 4,
+    'n_threads': 1,
     'cuDNN': True if len(K.tensorflow_backend._get_available_gpus()) else False,
     'train_dataset': 'wikitext-2/wiki.train.tokens',
     'valid_dataset': 'wikitext-2/wiki.valid.tokens',
     'test_dataset': 'wikitext-2/wiki.test.tokens',
     'vocab': 'wikitext-2/wiki.vocab',
     'vocab_size': 28914,
-    'num_sampled': 1000,
+    'num_sampled': 1,
     'charset_size': 262,
     'sentence_maxlen': 100,
     'token_maxlen': 50,
@@ -56,7 +56,7 @@ parameters_default = {
     'char_embedding_size': 16,
     'dropout_rate': 0.1,
     'word_dropout_rate': 0.05,
-    'weight_tying': True,
+    'weight_tying': False,
 }
 
 def ELMo(parameters=None):

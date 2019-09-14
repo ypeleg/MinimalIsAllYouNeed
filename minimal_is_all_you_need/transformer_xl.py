@@ -1027,15 +1027,15 @@ def TransformerXL(      units=6,
                         embed_dim=16,
                         hidden_dim=12,
                         num_token=13,
-                        num_block=3,
+                        num_block=1,
                         num_head=2,
-                        batch_size=3,
-                        memory_len=15,
-                        target_len=5,
+                        batch_size=2,
+                        memory_len=0,
+                        target_len=3,
                         dropout=0.0,
                         attention_dropout=0.0,
-                        cutoffs=None,
-                        div_val=1,
+                        cutoffs=[3],
+                        div_val=2,
                         force_projection=None,
                         bind_embeddings=True,
                         bind_projections=True,
@@ -1108,6 +1108,7 @@ def TransformerXL(      units=6,
         block_input, block_output = outputs[-1], outputs[-1]
         if not share_biases:
             context_bias, relative_bias = RelativeBias(units=units, name='Biases-{}'.format(i + 1))(last_memory)
+        """
         block_output = RelativePartialMultiHeadSelfAttention(
             units=units,
             num_head=num_head,
@@ -1115,7 +1116,8 @@ def TransformerXL(      units=6,
             attention_dropout=attention_dropout,
             name='Attention-{}'.format(i + 1),
         )([block_output, position_embed, last_memory, context_bias, relative_bias])
-        block_output = keras.layers.Add(name='Attention-Res-{}'.format(i + 1))([block_input, block_output])
+        """
+        block_output = block_input # keras.layers.Add(name='Attention-Res-{}'.format(i + 1))([block_input, block_output])
         if 0.0 < dropout < 1.0:
             block_output = keras.layers.Dropout(rate=dropout, name='Attention-Dropped-{}'.format(i + 1))(block_output)
         block_output = LayerNormalization(name='Attention-Norm-{}'.format(i + 1))(block_output)
