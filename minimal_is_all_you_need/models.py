@@ -109,6 +109,20 @@ def GPT_2(n_vocab=100, n_ctx=1024, n_embd=768, n_head=12, n_layer=12, batch_size
     model.compile( optimizer=keras.optimizers.Adam(), loss=keras.losses.sparse_categorical_crossentropy, )
     return model
 
+def GPT_3(n_vocab=100, n_ctx=1024, n_embd=128, n_head=96, n_layer=96, batch_size=None, fixed_input_shape=False):
+    if fixed_input_shape: input_layer_shape = (batch_size, n_ctx)
+    else: input_layer_shape = (batch_size, None)
+    input_layer = keras.layers.Input( batch_shape=input_layer_shape, name='Input', )
+    embed_token, embeddings = EmbeddingRet( input_dim=n_vocab, output_dim=n_embd, mask_zero=False, name='Embed-Token', )(input_layer)
+    embed_token_pos = PositionEmbedding( input_dim=n_ctx, output_dim=n_embd, mode=PositionEmbedding.MODE_ADD, name='Embed-Token-Pos', )(embed_token)
+    last_layer = embed_token_pos
+    for i in range(n_layer):
+        last_layer = _get_encoder_component( name='Encode-%d' % i, input_layer=last_layer, head_num=n_head, hidden_dim=n_embd * 4, attention_activation=None, feed_forward_activation=gelu, )
+    norm_layer = LayerNormalization( name='Norm', )(last_layer)
+    output_layer = EmbeddingSim( use_bias=False, name='Output', )([norm_layer, embeddings])
+    model = keras.models.Model(inputs=input_layer, outputs=output_layer)
+    model.compile( optimizer=keras.optimizers.Adam(), loss=keras.losses.sparse_categorical_crossentropy, )
+    return model
 
 def _wrap_layer(name, input_layer, build_func, trainable=True):
     normal_layer = LayerNormalization( trainable=trainable, name='%s-Norm' % name, )(input_layer)
